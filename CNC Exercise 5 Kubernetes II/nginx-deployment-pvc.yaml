@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-depl-pvc
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      volumes:
+      - name: nginx-pv-storage
+        persistentVolumeClaim:
+          claimName: nginx-pv-claim
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-pv-storage
+
