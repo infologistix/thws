@@ -1,0 +1,4 @@
+bases:
+  - ../base
+patches:
+  - nginx-deployment-v2.yaml
